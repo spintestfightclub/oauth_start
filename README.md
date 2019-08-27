@@ -33,6 +33,7 @@ Step 4: Authorize the `clientapp` to access the resource by ticking off approve 
 ![Authorize Page](img/authorize-screen.png)
 
 Step 5: After pressing authorize you will be redirected to `localhost:8080/login` with a code parameter. Copy that authorization code.
+
 ![Authorization Code](img/auth-code.png)
 
 ### Retrieving Token through `/oauth/token`
