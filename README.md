@@ -2,6 +2,14 @@
 
 This is a working Spring Boot OAuth project copied from [here](https://howtodoinjava.com/spring5/security5/oauth2-auth-server/).
 
+## Table of Contents
+- [Project Setup](#project-setup)
+- Authentication with Authorization Code
+    - [Retrieving Authorization Code](#retrieving-authorization-code)
+    - [Retrieving Token](#retrieving-token-through-oauthtoken)
+- Authentication with Password
+    - [Authentication with Password](#authentication-with-password)
+
 ## Workflow
 
 ### Project Setup
@@ -28,20 +36,34 @@ Step 5: After pressing authorize you will be redirected to `localhost:8080/login
 ![Authorization Code](img/auth-code.png)
 
 ### Retrieving Token through `/oauth/token`
-Step 1: Open Postman app and create a new request.
+Step 1: Create a Postman request with method set to `POST` and url to `localhost:8080/ouath/token`.
 
-Step 2: Set method type to `POST` and url to `localhost:8080/ouath/token`.
-
-Step 3: Under the `Headers` tab add `Authorization` with value `Basic Y2xpZW50YXBwOjEyMzQ1Ng==`
+Step 2: Under the `Headers` tab add `Authorization` with value `Basic Y2xpZW50YXBwOjEyMzQ1Ng==`
 
 ![Postman Headers](img/postman-headers.png)
 
-Step 4: Under the `Body` tab select `x-www-form-urlencoded` (this will populate a new header) and add the following key value pairs:
+Step 3: Under the `Body` tab select `x-www-form-urlencoded` (this will populate a new header) and add the following key value pairs:
 - `grant_type`: `authorization_code`
 - `redirect_uri`: `localhost:8081/login`
 - `code`: the code you got from the last part
 
 ![Postman Body](img/postman-body.png)
 
-Step 5: Press send button and you should get an JSON object with access-token.
+Step 4: Press send button and you should get an JSON object with JWT access-token.
+![Return Object](img/return-object.png)
+
+### Authentication with Password
+Step 1: Create a Postman request with method set to `POST` and url to `localhost:8080/ouath/token`.
+
+Step 2: Under the `Headers` tab add `Authorization` with value `Basic Y2xpZW50YXBwOjEyMzQ1Ng==`
+
+![Postman Headers](img/auth-password.png)
+
+Step 3: Under the `Body` tab select `x-www-form-urlencoded` (this will populate a new header) and add the following key value pairs:
+- `grant_type`: `password`
+- `redirect_uri`: `localhost:8081/login`
+- `username`: `humptygrumpty`
+- `password`: `123456`
+
+Step 4: Press send button and you should get an JSON object with a JWT access-token.
 ![Return Object](img/return-object.png)
