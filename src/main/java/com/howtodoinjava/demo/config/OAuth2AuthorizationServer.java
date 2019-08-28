@@ -17,12 +17,17 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableAuthorizationServer
 public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdapter 
 {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	DataSource dataSource;
+
 	@Autowired private AuthenticationManager authenticationManager;
 
 	@Override
@@ -36,6 +41,7 @@ public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients
+			//.jdbc(dataSource)
 			.inMemory()
 			.withClient("clientapp")
 			.secret(passwordEncoder.encode("123456"))
@@ -47,15 +53,6 @@ public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdap
 			.accessTokenValiditySeconds(5000)
 			.refreshTokenValiditySeconds(50000);
 	}
-
-/*	@Bean
-	@Primary
-	public DefaultTokenServices tokenServices() {
-		DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-		defaultTokenServices.setTokenStore(tokenStore());
-		defaultTokenServices.setSupportRefreshToken(true);
-		return defaultTokenServices;
-	}*/
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
