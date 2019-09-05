@@ -83,6 +83,8 @@ This is a working Spring Boot OAuth project copied from [here](https://howtodoin
         "email":"VALID@EMAIL.COM"
     }
     ```
-4. Press send button and you should receive a JSON object with the same information that you input in previous step.
+4. Press send button and you should receive back a JSON object with the same information that you inserted in previous step.
 
-5. Check that your new user has been registered by following the steps listed above under the `Authentication with password` header, replacing the given username and password with your new username and password.
+5. Your new user was just registered but remains disabled until email verification is confirmed.  To do so, follow link (send an empty postman `GET` request or copy the link into browser) sent to your email (written to `emailVerification.txt`)
+
+6. Check that your new user has been registered and enabled by following the steps listed above under the `Authentication with password` header, replacing the given username and password with your new username and password.

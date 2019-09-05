@@ -4,12 +4,11 @@
 
 /*drop table users if exists;
 drop table authorities if exists;
-drop table TRANSACTIONS if exists;
 create table users(
     username varchar_ignorecase(50) not null primary key,
-    password varchar_ignorecase(50) not null,
-    email varchar(100) not null,
-    enabled boolean not null
+    password varchar_ignorecase(500) not null,
+    enabled boolean not null,
+    email varchar(100) not null
 );
 
 create table authorities (
