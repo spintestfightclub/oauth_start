@@ -12,6 +12,7 @@ This is a working Spring Boot OAuth project copied from [here](https://howtodoin
 - Authentication with Password
     - [Authentication with Password](#authentication-with-password)
 - Reset Password
+    - [Reset Password](#reset-password)
 ## Workflow
 
 ### Project Setup
