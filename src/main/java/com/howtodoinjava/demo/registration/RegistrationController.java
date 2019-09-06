@@ -1,10 +1,7 @@
 package com.howtodoinjava.demo.registration;
 
 import com.howtodoinjava.demo.registration.emailVerification.UserRegistrationEvent;
-import com.howtodoinjava.demo.registration.user.CustomAuthorities;
-import com.howtodoinjava.demo.registration.user.CustomAuthoritiesRepository;
-import com.howtodoinjava.demo.registration.user.CustomUser;
-import com.howtodoinjava.demo.registration.user.CustomUserRepository;
+import com.howtodoinjava.demo.registration.user.*;
 import com.howtodoinjava.demo.utils.StringEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -56,7 +53,7 @@ public class RegistrationController {
         }
 
         try{
-            CustomUser customUser = CustomUser.builder().username(username).password(password).email(email).enabled(false).authority(gAuth).encryptedId(idEncoder.encode(username + password)).build();
+            CustomUser customUser = CustomUser.builder().username(username).password(password).email(email).enabled(false).authority(gAuth).encryptedId(idEncoder.encode(username + password)).accountNonExpired(true).accountNonLocked(true).credentialsNonExpired(true).totpEnabled(true).build();
             customUserRepo.saveIfNotExists(customUser);
             CustomAuthorities customAuthority = CustomAuthorities.builder().username(username).authority(gAuth).build();
             customAuthoritiesRepository.save(customAuthority);

@@ -12,7 +12,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class EmailVerificationListener implements ApplicationListener<UserRegistrationEvent> {
-    private final JavaMailSender mailSender;
+    //private final JavaMailSender mailSender;
 
     @Override
     public void onApplicationEvent(UserRegistrationEvent event){

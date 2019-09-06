@@ -1,5 +1,7 @@
 package com.howtodoinjava.demo.config;
 
+import com.howtodoinjava.demo.registration.user.CustomUser;
+import com.howtodoinjava.demo.registration.user.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +12,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.sql.DataSource;
 
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
 @Order(1)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired private DataSource dataSource;
+    @Autowired private CustomUserDetailsService customUserDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,12 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
-        JdbcUserDetailsManager mgr = new JdbcUserDetailsManager();
-        mgr.setDataSource(dataSource);
-        // Leave comment for reference if need to edit and manipulate jdbcUserDetailsManager sql statements later on
-        // mgr.setUpdateUserSql("update users set password = ?, enabled = ?, email = ?, ...... where username = ?");
-        return mgr;
+    public CustomUser customUser(){
+        return new CustomUser();
     }
 
     @Bean
@@ -46,8 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
  
     @Override
+    @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(this.dataSource);//.withDefaultSchema();
+        auth.jdbcAuthentication().dataSource(this.dataSource).and().userDetailsService(customUserDetailsService);//.withDefaultSchema();
     }
 
     @Override

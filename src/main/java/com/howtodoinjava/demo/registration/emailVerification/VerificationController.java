@@ -1,6 +1,7 @@
 package com.howtodoinjava.demo.registration.emailVerification;
 
 import com.howtodoinjava.demo.registration.user.CustomUser;
+import com.howtodoinjava.demo.registration.user.CustomUserDetails;
 import com.howtodoinjava.demo.registration.user.CustomUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -24,11 +25,11 @@ public class VerificationController {
     @GetMapping("/verify/email")
     public String verifyEmail(@RequestParam String eid){
         String encryptedId = eid;
-        CustomUser custUser = customUserRepo.findByEncryptedId(encryptedId);
-        if(jdbcUserDetailsManager.userExists(custUser.getUsername())){
-            UserDetails defUser = jdbcUserDetailsManager.loadUserByUsername(custUser.getUsername());
-            custUser.setEnabled(true);
-            jdbcUserDetailsManager.updateUser(new User(defUser.getUsername(), defUser.getPassword(), true, defUser.isAccountNonExpired(), defUser.isCredentialsNonExpired(), defUser.isAccountNonLocked(), defUser.getAuthorities()));
+        String username = customUserRepo.findByEncryptedId(encryptedId).getUsername();
+        if(jdbcUserDetailsManager.userExists(username)){
+            CustomUserDetails customUser = (CustomUserDetails) jdbcUserDetailsManager.loadUserByUsername(username);
+            customUser.getUser().setEnabled(true);
+            customUserRepo.save(customUser.getUser());
             return "User Verified!";
         }
         return "User invalid.";

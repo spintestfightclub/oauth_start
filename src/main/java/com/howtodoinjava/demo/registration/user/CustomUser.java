@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
-
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -24,4 +22,8 @@ public class CustomUser {
     GrantedAuthority authority;
     String encryptedId;
     boolean enabled;
+    boolean accountNonExpired;
+    boolean accountNonLocked;
+    boolean credentialsNonExpired;
+    boolean totpEnabled;
 }
