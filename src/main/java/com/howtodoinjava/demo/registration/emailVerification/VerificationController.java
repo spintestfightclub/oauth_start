@@ -1,11 +1,8 @@
 package com.howtodoinjava.demo.registration.emailVerification;
 
-import com.howtodoinjava.demo.registration.user.CustomUser;
 import com.howtodoinjava.demo.registration.user.CustomUserDetails;
 import com.howtodoinjava.demo.registration.user.CustomUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

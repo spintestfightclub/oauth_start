@@ -1,0 +1,7 @@
+# Folders
+target/
+.idea/
+
+# Files
+emailPasswordReset.txt
+emailVerification.txt

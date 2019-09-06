@@ -1,8 +1,8 @@
-package com.howtodoinjava.demo.registration.emailVerification;
+package com.howtodoinjava.demo.passwordReset.emailPasswordResetVerification;
 
+import com.howtodoinjava.demo.registration.emailVerification.UserRegistrationEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -11,17 +11,17 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class EmailVerificationListener implements ApplicationListener<UserRegistrationEvent> {
+public class EmailPasswordResetVerificationListener implements ApplicationListener<UserPasswordResetEvent> {
     // private final JavaMailSender mailSender;
     @Override
-    public void onApplicationEvent(UserRegistrationEvent event){
+    public void onApplicationEvent(UserPasswordResetEvent event){
         String username = event.getUser().getUsername();
-        String encryptedId = event.getUser().getEncryptedId();
         String email = event.getUser().getEmail();
+        String token = event.getToken().getToken();
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("emailVerification.txt"));
-            writer.write("Email: " + email + "\nVerification Link: http://localhost:8080/verify/email?eid=" + encryptedId);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("emailPasswordReset.txt"));
+            writer.write("Email: " + email + "\nVerification Link: http://localhost:8080/user/reset_password/redirect?token=" + token);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
