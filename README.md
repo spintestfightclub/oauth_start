@@ -1,6 +1,8 @@
 # Spring-Boot OAuth2 Setup 
 
-This is a working Spring Boot OAuth project copied from [here](https://howtodoinjava.com/spring5/security5/oauth2-auth-server/).
+This is a working Spring Boot OAuth project copied from [here](https://howtodoinjava.com/spring5/security5/oauth2-auth-server/). All the Postman request templates can be found in the below button. 
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dc698c270689a25bc286)
 
 ## Table of Contents
 - [Project Setup](#project-setup)

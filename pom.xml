@@ -9,7 +9,7 @@
 		<version>2.1.4.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.howtodoinjava</groupId>
+	<groupId>io.levvel.app</groupId>
 	<artifactId>spring-oauth2-resource-server-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-oauth2-resource-server-demo</name>
