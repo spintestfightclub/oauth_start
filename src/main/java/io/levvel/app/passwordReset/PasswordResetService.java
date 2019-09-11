@@ -2,26 +2,23 @@ package io.levvel.app.passwordReset;
 
 import io.levvel.app.passwordReset.dto.PasswordResetToken;
 import io.levvel.app.passwordReset.dto.PasswordResetTokenRepository;
-import io.levvel.app.registration.user.CustomUserDetails;
+import io.levvel.app.registration.user.CustomUser;
+import io.levvel.app.registration.user.CustomUserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class PasswordResetService {
     private final PasswordResetTokenRepository passwordResetTokenRepository;
-    private final JdbcUserDetailsManager jdbcUserDetailsManager;
-
-    public PasswordResetService(PasswordResetTokenRepository passwordResetTokenRepository, JdbcUserDetailsManager jdbcUserDetailsManager) {
-        this.passwordResetTokenRepository = passwordResetTokenRepository;
-        this.jdbcUserDetailsManager = jdbcUserDetailsManager;
-    }
+    private final CustomUserRepository customUserRepository;
 
     public PasswordResetToken createPasswordResetToken(String username) {
         final PasswordResetToken token = new PasswordResetToken();
@@ -40,8 +37,8 @@ public class PasswordResetService {
         if (passToken == null) {
             return "invalidToken";
         }
-        CustomUserDetails user = (CustomUserDetails) jdbcUserDetailsManager.loadUserByUsername(passToken.getUsername());
-        final Authentication auth = new UsernamePasswordAuthenticationToken(user, null, Arrays.asList(new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
+        CustomUser customUser = customUserRepository.findByUsername(passToken.getUsername());
+        final Authentication auth = new UsernamePasswordAuthenticationToken(customUser, null, Arrays.asList(new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
         SecurityContextHolder.getContext().setAuthentication(auth);
         return null;
     }

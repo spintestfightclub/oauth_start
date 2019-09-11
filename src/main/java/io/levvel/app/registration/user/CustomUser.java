@@ -1,7 +1,10 @@
 package io.levvel.app.registration.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -16,6 +19,7 @@ public class CustomUser {
     @JsonIgnore @Id
     @GeneratedValue Long id;
 
+    @Column(unique = true)
     String username;
     String password;
     String email;
@@ -26,4 +30,5 @@ public class CustomUser {
     boolean accountNonLocked;
     boolean credentialsNonExpired;
     boolean totpEnabled;
+  private String secret;
 }

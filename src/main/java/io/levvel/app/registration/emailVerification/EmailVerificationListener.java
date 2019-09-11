@@ -17,14 +17,7 @@ public class EmailVerificationListener implements ApplicationListener<UserRegist
         String username = event.getUser().getUsername();
         String encryptedId = event.getUser().getEncryptedId();
         String email = event.getUser().getEmail();
-
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("emailVerification.txt"));
-            writer.write("Email: " + email + "\nVerification Link: http://localhost:8080/verify/email?eid=" + encryptedId);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String verLink = "http://localhost:8080/verify/email?eid=" + encryptedId;
 
         // WRITE MESSAGE TO A FILE FOR NOW, USE THIS EMAIL SENDING LATER
         /*

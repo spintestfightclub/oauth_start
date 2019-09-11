@@ -18,14 +18,6 @@ public class EmailPasswordResetVerificationListener implements ApplicationListen
         String email = event.getUser().getEmail();
         String token = event.getToken().getToken();
 
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("emailPasswordReset.txt"));
-            writer.write("Email: " + email + "\nVerification Link: http://localhost:8080/user/reset_password/redirect?token=" + token);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         // WRITE MESSAGE TO A FILE FOR NOW, USE THIS EMAIL SENDING LATER
         /*
         SimpleMailMessage message = new SimpleMailMessage();

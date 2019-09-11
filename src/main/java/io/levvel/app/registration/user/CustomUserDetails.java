@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Service
 public class CustomUserDetails implements UserDetails {
     private CustomUser user;
 
@@ -61,4 +60,10 @@ public class CustomUserDetails implements UserDetails {
     public String getEmail(){
         return user.getEmail();
     }
+
+    public boolean isTotpEnabled(){return user.isTotpEnabled();}
+
+    public String getSecret(){return user.getSecret();}
+
+    public Long getId(){return user.getId();}
 }

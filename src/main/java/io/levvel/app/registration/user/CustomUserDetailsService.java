@@ -21,6 +21,7 @@ public class CustomUserDetailsService extends JdbcUserDetailsManager{
         if(customUser == null){
             throw new UsernameNotFoundException(username);
         }
+
         return new CustomUserDetails(customUser);
     }
 

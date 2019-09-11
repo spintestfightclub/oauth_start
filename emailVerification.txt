@@ -1,2 +1,0 @@
-Email: testemail@gmail.com
-Verification Link: http://localhost:8080/verify/email?eid=dGVzdFJiMSQyYSQxMCQzSlY3dGxPcTc5VnhKUHB0REpHay91aWlTRS9JUmpiTkRBdFNrQVRrbTN0L3dvME1WLlptUw-360179379
