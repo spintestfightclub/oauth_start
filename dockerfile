@@ -3,7 +3,7 @@ WORKDIR /usr/src/app
 COPY src /usr/src/app/src
 COPY img /usr/src/app/img
 COPY pom.xml /usr/src/app/
-RUN mvn package
+RUN mvn package -DskipTests
 
 # Final image
 FROM maven:3.6.1-jdk-11-slim
