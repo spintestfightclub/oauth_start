@@ -2,12 +2,12 @@ apiVersion: apps/v1beta2
 kind: ReplicaSet
 metadata:
   name: oauth_start
-  namespace: oath_start
+  namespace: demo
   labels:
     applicationName: oauth_start
   annotations:
     strategy.spinnaker.io/max-version-history: '2'
-    traffic.spinnaker.io/load-balancers: '["service oauth_start"]'
+    traffic.spinnaker.io/load-balancers: '["service oauth_start_lb"]'
 spec:
   replicas: 3
   selector:
