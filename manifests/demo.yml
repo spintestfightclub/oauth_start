@@ -24,8 +24,8 @@ spec:
           ports:
             - containerPort: 8080
           readinessProbe:
-            httpPost:
-              path: /user/register
+            httpGet:
+              path: /
               port: 8080
 
 # Trigger !!
