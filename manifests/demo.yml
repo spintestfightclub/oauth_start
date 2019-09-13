@@ -7,7 +7,7 @@ metadata:
     applicationName: oauth_start
   annotations:
     strategy.spinnaker.io/max-version-history: '2'
-    traffic.spinnaker.io/load-balancers: '["service oauth_start_lb"]'
+    traffic.spinnaker.io/load-balancers: '["service oauth-start-lb"]'
 spec:
   replicas: 3
   selector:
