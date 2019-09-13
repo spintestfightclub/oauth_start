@@ -1,10 +1,10 @@
 apiVersion: apps/v1beta2
 kind: ReplicaSet
 metadata:
-  name: oauth_start
+  name: oauth-start
   namespace: demo
   labels:
-    applicationName: oauth_start
+    applicationName: oauth-start
   annotations:
     strategy.spinnaker.io/max-version-history: '2'
     traffic.spinnaker.io/load-balancers: '["service oauth-start-lb"]'
@@ -12,14 +12,14 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      applicationName: oauth_start
+      applicationName: oauth-start
   template:
     metadata:
       labels:
-        applicationName: oauth_start
+        applicationName: oauth-start
     spec:
       containers:
-        - name: oauth_start
+        - name: oauth-start
           image: 201599078153.dkr.ecr.us-east-1.amazonaws.com/oauth_start
           ports:
             - containerPort: 8080
